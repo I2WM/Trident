@@ -96,9 +96,9 @@ conda activate HAT
 
 # 1， Conduct model ensemble for EastResearchAreas
 python /models/HAT/ensemble.py \
---folder1 /path/to/HAT/track2/EastResearchAreas \
+--folder1 /path/to/MambaIR/track2/EastResearchAreas \
 --folder2 /path/to/HAT/track2/EastResearchAreas \
---folder3 /path/to/HAT/track2/EastResearchAreas \
+--folder3 /path/to/SRFormer/track2/EastResearchAreas \
 --weights 0.06 0.02 0.92 \
 --output /path/to/track2/EastResearchAreas/rgb
 

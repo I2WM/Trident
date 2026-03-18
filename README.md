@@ -1,5 +1,7 @@
 # NTIRE 2026 3D Content Super-Resolution Challenge Solutions
 
+![Logo](assets/trident_logo.svg)
+
 This repository contains the **2D front-end** of our solution to the **NTIRE 2026 3D Content Super-Resolution Challenge**, covering:
 
 - **Track 1:** Bicubic Degradation
@@ -13,6 +15,7 @@ For the **3D reconstruction** part, please refer to our 3D repository:
 
 - [Codabench Competition Track 1](https://www.codabench.org/competitions/12891/)
 - [Codabench Competition Track 2](https://www.codabench.org/competitions/12894/)
+
 
 ## Model Checkpoints
 

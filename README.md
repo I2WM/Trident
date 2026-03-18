@@ -40,7 +40,7 @@ python models/SRFormer/basicsr/test.py -opt models/SRFormer/options/test/SRForme
 ## Track2: Realistic Degradation
 
 ### Instruction
-HAT was pretrained on [DIV2K](https://data.vision.ee.ethz.ch/cvl/DIV2K/) and [Flickr2K](https://www.kaggle.com/datasets/daehoyang/flickr2k), we also finetuned HAT models on [OST]([https://www.kaggle.com/datasets/thaihoa1476050/df2k-ost](https://huggingface.co/datasets/Iceclear/DF2K-OST)) and [LSDIR](https://github.com/ofsoundof/LSDIR) dataset.
+We utilize three different models to jointly exploit branch-level stabilization and cross-model complementarity, and ensemble their outputs to produce more reliable restored views for the subsequent \textbf{3DGS} optimization stage. HAT was pretrained on [DIV2K](https://data.vision.ee.ethz.ch/cvl/DIV2K/) and [Flickr2K](https://www.kaggle.com/datasets/daehoyang/flickr2k), we also finetuned HAT models on [OST]([https://www.kaggle.com/datasets/thaihoa1476050/df2k-ost](https://huggingface.co/datasets/Iceclear/DF2K-OST)) and [LSDIR](https://github.com/ofsoundof/LSDIR) dataset.
 
 ### Execution
 

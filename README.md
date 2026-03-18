@@ -1,14 +1,31 @@
-# [3D-Super-Resolution](https://github.com/I2WM/3D-Super-Resolution)
+# NTIRE 2026 3D Content Super-Resolution Challenge Solutions
+
+This repository contains the **2D front-end** of our solution to the **NTIRE 2026 3D Content Super-Resolution Challenge**, covering:
+
+- **Track 1:** Bicubic Degradation
+- **Track 2:** Realistic Degradation
+
+This repository focuses on the **2D front-end pipeline**, including rendered image restoration and enhancement for downstream 3D content super-resolution.  
+For the **3D reconstruction** part, please refer to our 3D repository:  
+[3D-Super-Resolution](https://github.com/I2WM/3D-Super-Resolution)
+
+## Challenge Website
+
+- [Codabench Competition Track 1](https://www.codabench.org/competitions/12891/)
+- [Codabench Competition Track 2](https://www.codabench.org/competitions/12894/)
+
+## Model Checkpoints
+
+We provide the pretrained checkpoints for **SRFormerV2**, **MambaIRV2**, and **HAT-L** [here](https://drive.google.com/drive/folders/1Ypz94vPX-TR7c0tH6xn0jVdFpZbazuoR?usp=sharing).
 
 
+## Track 1: Bicubic Degradation
 
-### Track1
-
-#### Instruction
+### Instruction
 
 We use SRFormerV2 to perform super-resolution of rendered LR in Track1
 
-#### Execution
+### Execution
 
 ```bash
 # activate SRFormerV2
@@ -20,12 +37,12 @@ python models/SRFormer/basicsr/test.py -opt models/SRFormer/options/test/SRForme
 ```
 
 
-### Track2
+## Track2: Realistic Degradation
 
-#### Instruction
-HAT was pretrained on DIV2K and Flickr2K, we also finetuned HAT models on OST and LSDIR dataset.
+### Instruction
+HAT was pretrained on [DIV2K](https://data.vision.ee.ethz.ch/cvl/DIV2K/) and [Flickr2K](https://www.kaggle.com/datasets/daehoyang/flickr2k), we also finetuned HAT models on [OST]([https://www.kaggle.com/datasets/thaihoa1476050/df2k-ost](https://huggingface.co/datasets/Iceclear/DF2K-OST)) and [LSDIR](https://github.com/ofsoundof/LSDIR) dataset.
 
-#### Execution
+### Execution
 
 ```bash
 # activate mambairv2

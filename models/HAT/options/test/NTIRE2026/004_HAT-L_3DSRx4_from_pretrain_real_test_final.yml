@@ -1,0 +1,57 @@
+# general settings
+name: 004_HAT-L_3DSRx4_from_pretrain_real_test_final
+model_type: HATModel
+scale: 4
+num_gpu: auto
+manual_seed: 0
+
+# dataset and data loader settings
+datasets:
+  test_1:  # the 1st test dataset
+    name: EastResearchAreas
+    type: SingleImageDataset
+#    dataroot_gt: ./datasets/Set5/HR/x4
+    dataroot_lq: /path/to/track2/EastResearchAreas/rgb
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+
+  test_2:  # the 1st test dataset
+    name: NorthAreas
+    type: SingleImageDataset
+    dataroot_lq: /path/to/track2/NorthAreas/rgb
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+
+
+# network structures
+network_g:
+  type: HAT
+  upscale: 4
+  in_chans: 3
+  img_size: 64
+  window_size: 16
+  compress_ratio: 3
+  squeeze_factor: 30
+  conv_scale: 0.01
+  overlap_ratio: 0.5
+  img_range: 1.
+  depths: [6, 6, 6, 6, 6, 6]
+  embed_dim: 180
+  num_heads: [6, 6, 6, 6, 6, 6]
+  mlp_ratio: 2
+  upsampler: 'pixelshuffle'
+  resi_connection: '1conv'
+
+# path
+path:
+  pretrain_network_g: /path/to/HAT/experiments/HAT-L-real.pth
+  param_key_g: 'params_ema'
+  strict_load_g: true
+  resume_state: ~
+
+# validation settings
+val:
+  save_img: true
+  suffix: 'hat'  # add suffix to saved images, if None, use exp name

@@ -1,0 +1,58 @@
+# general settings
+name: 003_My_3DSR_MambaIRv2_ClassicSR_x4_tta_valid
+model_type: MambaIRv2Model
+scale: 4
+num_gpu: 8
+manual_seed: 10
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: 3DSR
+    type: SingleImageDataset
+#    dataroot_gt: /home/wedream/mydata/srdata/DIV2K/DIV2K_valid_HR
+    dataroot_lq: /path/to/3dsr/track1_lr/WestTeachingAreas/rgb
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+
+
+
+# network structures
+network_g:
+  type: MambaIRv2
+  upscale: 4
+  in_chans: 3
+  img_size: 64
+  img_range: 1.
+  embed_dim: 174
+  d_state: 16
+  depths: [6, 6, 6, 6, 6, 6, 6, 6, 6]
+  num_heads: [6, 6, 6, 6, 6, 6, 6, 6, 6]
+  window_size: 16
+  inner_rank: 64
+  num_tokens: 128
+  convffn_kernel_size: 5
+  mlp_ratio: 2.0
+  upsampler: 'pixelshuffle'
+  resi_connection: '1conv'
+
+# path
+path:
+  pretrain_network_g: experiments/pretrained_models/mambairv2_classicSR_Large_x4.pth
+  strict_load_g: true
+
+# validation settings
+val:
+#  save_img: false
+  save_img: true
+  suffix: 'mamba'  # add suffix to saved images, if None, use exp name
+
+#  metrics:
+#    psnr: # metric name, can be arbitrary
+#      type: calculate_psnr
+#      crop_border: 4
+#      test_y_channel: true
+#    ssim:
+#      type: calculate_ssim
+#      crop_border: 4
+#      test_y_channel: true

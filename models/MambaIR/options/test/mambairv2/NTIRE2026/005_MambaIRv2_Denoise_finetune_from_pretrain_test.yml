@@ -1,0 +1,59 @@
+# general settings
+name: 005_MambaIRv2_Denoise_finetune_from_pretrain_test.yml
+model_type: MambaIRModel
+scale: 1
+num_gpu: auto
+manual_seed: 10
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: DIV2K_VAL
+    type: PairedImageDataset
+#    dataroot_gt: ./datasets/Set5/GTmod4
+    dataroot_gt: /path/to/Xformer/datasets/DIV2K/denoising_val_gt
+    dataroot_lq: /path/to/Xformer/datasets/DIV2K/denoising_val_input
+    io_backend:
+      type: disk
+
+
+
+# network structures
+network_g:
+  type: MambaIRv2
+  upscale: 4
+  in_chans: 3
+#  img_size: 64
+  img_size: 128
+  img_range: 1.
+  embed_dim: 174
+  d_state: 16
+  depths: [6, 6, 6, 6, 6, 6, 6, 6, 6]
+  num_heads: [6, 6, 6, 6, 6, 6, 6, 6, 6]
+  window_size: 16
+  inner_rank: 64
+  num_tokens: 128
+  convffn_kernel_size: 5
+  mlp_ratio: 2.0
+#  upsampler: 'pixelshuffle'
+#  resi_connection: '1conv'
+
+# path
+path:
+  pretrain_network_g: experiments/005_MambaIRv2_Denoise_finetune_from_pretrain_archived_20260308_233650/models/net_g_50000.pth
+  strict_load_g: true
+
+# validation settings
+val:
+#  save_img: false
+  save_img: false
+  suffix: 'mamba'  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+      test_y_channel: false

@@ -1,0 +1,70 @@
+# general settings
+name: 007_My_val_denoise_MambaIRv2_tta_hx
+model_type: MambaIRv2Model
+scale: 1
+#num_gpu: 8
+num_gpu: 1
+#manual_seed: 10
+manual_seed: 2025
+
+datasets:
+  val:
+    task: SR
+    name: DIV2K-val
+#    type: PairedImageDataset
+    type: PairedImageDataset
+#    dataroot_gt: /home/gh/dataset/ColorDN/CBSD68HQ
+#    dataroot_lq: /home/gh/dataset/ColorDN/CBSD68HQ
+    dataroot_gt: datasets/DIV2K/denoising_val_gt
+    dataroot_lq: datasets/DIV2K/denoising_val_input
+    io_backend:
+      type: disk
+
+
+
+# network structures
+network_g:
+  type: MambaIRv2
+  upscale: 1
+  in_chans: 3
+  img_size: 128
+  img_range: 1.
+#  embed_dim: 174
+  embed_dim: 48
+  #  d_state: 16
+  d_state: 8
+  #  depths: [6, 6, 6,6,6,6]
+#  num_heads: [6,6,6,6,6,6]
+  depths: [5, 5, 5, 5]
+  num_heads: [4, 4, 4, 4]
+  window_size: 16
+#  inner_rank: 64
+#  num_tokens: 128
+  inner_rank: 32
+  num_tokens: 64
+  convffn_kernel_size: 5
+#  mlp_ratio: 2.
+  mlp_ratio: 1.
+
+
+# path
+path:
+  pretrain_network_g: experiments/003_My_train_MambaIRv2_DIV2K_level50_hx/models/net_g_20000.pth
+  strict_load_g: true
+
+# validation settings
+val:
+#  save_img: false
+  save_img: true
+  suffix: 'mamba'  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+#      test_y_channel: true
+#    ssim:
+#      type: calculate_ssim
+#      crop_border: 0
+#      test_y_channel: false

@@ -1,0 +1,58 @@
+name: 001xf25_test_HAT-L_SRx4_finetune_from_ImageNet_pretrain_th_tta
+model_type: HATModel
+scale: 4
+num_gpu: 1
+manual_seed: 2025
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: XF2025_TEST
+    type: SingleImageDataset
+#    dataroot_gt: /data2/guohang/dataset/ARTSR/Set5/HR
+    dataroot_lq: xfdata2025/preliminary_test/low
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+
+# network structures
+network_g:
+#  type: HAT
+  type: HATLocal
+  upscale: 4
+  in_chans: 3
+  img_size: 64
+  window_size: 16
+  compress_ratio: 3
+  squeeze_factor: 30
+  conv_scale: 0.01
+  overlap_ratio: 0.5
+  img_range: 1.
+#  depths: [6, 6, 6, 6, 6, 6]
+  depths: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+  embed_dim: 180
+  num_heads: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+  mlp_ratio: 2
+  upsampler: 'pixelshuffle'
+  resi_connection: '1conv'
+
+
+# path
+path:
+  pretrain_network_g: experiments/001xf25_train_HAT-L_SRx4_finetune_from_ImageNet_pretrain/models/net_g_196000.pth
+  strict_load_g: true
+  param_key_g: 'params_ema'
+
+# validation settings
+val:
+  save_img: true
+  suffix: 'hat'  # add suffix to saved images, if None, use exp name
+
+#  metrics:
+#    psnr: # metric name, can be arbitrary
+#      type: calculate_psnr
+#      crop_border: 4
+#      test_y_channel: true
+#    ssim:
+#      type: calculate_ssim
+#      crop_border: 4
+#      test_y_channel: true

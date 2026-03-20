@@ -83,7 +83,7 @@ torchrun --nproc_per_node=1 \
   --node_rank=0 \
   --master_addr=127.0.0.1 \
   --master_port=29511 \
-  /models/HAT/hat/test.py -opt /models/HAT/options/test/NTIRE2026/002_HAT-L_3DSRx4_from_pretrain_real_test_final.yml \
+  /models/HAT/hat/test.py -opt /models/HAT/options/test/NTIRE2026/004_HAT-L_3DSRx4_from_pretrain_real_test_final.yml \
   --launcher pytorch
 
 # Rename the inference results
@@ -94,15 +94,15 @@ python /models/MambaIR/rename.py \
 --dest ".JPG"
   
 # Model Ensemble
-# 0.06 MambaIR+0.02SRFormer+0.92HAT
+# 0.005 MambaIR + 0.005 SRFormer + 0.99 HAT
 conda activate HAT
 
 # 1， Conduct model ensemble for EastResearchAreas
 python /models/HAT/ensemble.py \
 --folder1 /path/to/MambaIR/track2/EastResearchAreas \
---folder2 /path/to/HAT/track2/EastResearchAreas \
---folder3 /path/to/SRFormer/track2/EastResearchAreas \
---weights 0.06 0.02 0.92 \
+--folder2 /path/to/SRFormer/track2/EastResearchAreas \
+--folder3 /path/to/HAT/track2/EastResearchAreas \
+--weights 0.005 0.005 0.99 \
 --output /path/to/track2/EastResearchAreas/rgb
 
 # Conduct model ensemble for NorthAreas
@@ -110,7 +110,7 @@ python /models/HAT/ensemble.py \
 --folder1 /path/to/MambaIR/track2/NorthAreas \
 --folder2 /path/to/SRFormer/track2/NorthAreas \
 --folder3 /path/to/HAT/track2/NorthAreas \
---weights 0.06 0.02 0.92 \
+--weights 0.005 0.005 0.99 \
 --output /path/to/track2/NorthAreas/rgb
 
 ```

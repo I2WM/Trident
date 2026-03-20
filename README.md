@@ -55,7 +55,7 @@ conda activate mambair
 python models/MambaIR/basicsr/test.py -opt models/MambaIR/options/test/mambairv2/004_My_3DSR_MambaIRv2_RealSR_x4_tta_test.yml
 
 # Rename the inference results
-python /models/MambaIR/rename.py \
+python models/MambaIR/rename.py \
 "/path/to/track2/EastResearchAreas" \
 "/path/to/track2/NorthAreas" \
 --pattern "_mamba.png" \
@@ -68,7 +68,7 @@ conda activate srformer
 python models/SRFormer/basicsr/test.py -opt models/SRFormer/options/test/SRFormerV2/002_SRFormer_3DSR_from_pretrain_real_test_final.yml
 
 # Rename the inference results
-python /models/MambaIR/rename.py \
+python models/MambaIR/rename.py \
 "/path/to/track2/EastResearchAreas" \
 "/path/to/track2/NorthAreas" \
 --pattern "_002_SRFormer_3DSR_from_pretrain_real_test_final.png" \
@@ -83,11 +83,11 @@ torchrun --nproc_per_node=1 \
   --node_rank=0 \
   --master_addr=127.0.0.1 \
   --master_port=29511 \
-  /models/HAT/hat/test.py -opt /models/HAT/options/test/NTIRE2026/004_HAT-L_3DSRx4_from_pretrain_real_test_final.yml \
+  models/HAT/hat/test.py -opt models/HAT/options/test/NTIRE2026/004_HAT-L_3DSRx4_from_pretrain_real_test_final.yml \
   --launcher pytorch
 
 # Rename the inference results
-python /models/MambaIR/rename.py \
+python models/MambaIR/rename.py \
 "/path/to/track2/EastResearchAreas" \
 "/path/to/track2/NorthAreas" \
 --pattern "_hat.png" \
@@ -98,7 +98,7 @@ python /models/MambaIR/rename.py \
 conda activate HAT
 
 # 1， Conduct model ensemble for EastResearchAreas
-python /models/HAT/ensemble.py \
+python models/HAT/ensemble.py \
 --folder1 /path/to/MambaIR/track2/EastResearchAreas \
 --folder2 /path/to/SRFormer/track2/EastResearchAreas \
 --folder3 /path/to/HAT/track2/EastResearchAreas \
@@ -106,7 +106,7 @@ python /models/HAT/ensemble.py \
 --output /path/to/track2/EastResearchAreas/rgb
 
 # Conduct model ensemble for NorthAreas
-python /models/HAT/ensemble.py \
+python models/HAT/ensemble.py \
 --folder1 /path/to/MambaIR/track2/NorthAreas \
 --folder2 /path/to/SRFormer/track2/NorthAreas \
 --folder3 /path/to/HAT/track2/NorthAreas \

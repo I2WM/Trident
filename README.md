@@ -11,6 +11,8 @@ This repository focuses on the **2D front-end pipeline**, including rendered ima
 For the **3D reconstruction** part, please refer to our 3D repository:  
 [3D-Super-Resolution](https://github.com/I2WM/3D-Super-Resolution)
 
+For the full pipeline, this front-end repository is also responsible for the required depth preprocessing step before 3DGS training.
+
 ## Challenge Website
 
 - [Codabench Competition Track 1](https://www.codabench.org/competitions/12891/)
@@ -113,4 +115,23 @@ python models/HAT/ensemble.py \
 --weights 0.005 0.005 0.99 \
 --output /path/to/track2/NorthAreas/rgb
 
+```
+
+## Depth
+
+Depth preprocessing is shared by both tracks and should be completed before starting 3DGS training.
+We use `cv2.INTER_LINEAR` to upscale `depth/*.png` by `x4`.
+
+Minimal example:
+
+```bash
+python upscale_depth.py /path/to/xxx
+```
+
+This command writes the upscaled depth files to `/path/to/xxx_depth_x4` by default while preserving the scene/depth directory structure.
+
+You can also provide an explicit output directory:
+
+```bash
+python upscale_depth.py /path/to/xxx /path/to/output_depth_x4
 ```

@@ -122,12 +122,6 @@ python models/HAT/ensemble.py \
 Depth preprocessing is shared by both tracks and should be completed before starting 3DGS training.
 We use `cv2.INTER_LINEAR` to upscale `depth/*.png` by `x4`.
 
-Minimal example:
-
-```bash
-python upscale_depth.py /path/to/xxx
-```
-
 This command writes the upscaled depth files to `/path/to/xxx_depth_x4` by default while preserving the scene/depth directory structure.
 
 You can also provide an explicit output directory:

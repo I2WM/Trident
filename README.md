@@ -96,7 +96,7 @@ python models/MambaIR/rename.py \
 --dest ".JPG"
   
 # Model Ensemble
-# 0.005 MambaIR + 0.005 SRFormer + 0.99 HAT
+# 0.01 MambaIR + 0.01 SRFormer + 0.98 HAT
 conda activate HAT
 
 # 1， Conduct model ensemble for EastResearchAreas
@@ -104,7 +104,7 @@ python models/HAT/ensemble.py \
 --folder1 /path/to/MambaIR/track2/EastResearchAreas \
 --folder2 /path/to/SRFormer/track2/EastResearchAreas \
 --folder3 /path/to/HAT/track2/EastResearchAreas \
---weights 0.005 0.005 0.99 \
+--weights 0.01 0.01 0.98 \
 --output /path/to/track2/EastResearchAreas/rgb
 
 # Conduct model ensemble for NorthAreas
@@ -112,7 +112,7 @@ python models/HAT/ensemble.py \
 --folder1 /path/to/MambaIR/track2/NorthAreas \
 --folder2 /path/to/SRFormer/track2/NorthAreas \
 --folder3 /path/to/HAT/track2/NorthAreas \
---weights 0.005 0.005 0.99 \
+--weights 0.01 0.01 0.98 \
 --output /path/to/track2/NorthAreas/rgb
 
 ```
